@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* News100 Design System — Modern Indian News Portal
+   Primary Orange #FF6B00, White, Accent Red #E53935.
+   All colors must be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    /* Brand Orange #FF6B00 */
+    --primary: 25 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Soft warm gray */
+    --secondary: 30 20% 96%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 30 15% 95%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 25 100% 96%;
+    --accent-foreground: 25 100% 30%;
+
+    /* Accent Red #E53935 — used for breaking/live tags */
+    --destructive: 2 78% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 90%;
+    --input: 30 10% 90%;
+    --ring: 25 100% 50%;
+
+    /* News-specific tokens */
+    --news-red: 2 78% 55%;          /* #E53935 */
+    --news-red-foreground: 0 0% 100%;
+    --news-orange: 25 100% 50%;      /* #FF6B00 */
+    --news-orange-dark: 22 100% 42%;
+    --news-ink: 0 0% 12%;
+
+    /* Layout */
+    --content-width: 1280px;
+    --header-height: 80px;
+
+    --radius: 0.375rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 25 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 15% 95%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 30 10% 90%;
+    --sidebar-ring: 25 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 25 100% 55%;
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 25 50% 18%;
+    --accent-foreground: 25 100% 75%;
+
+    --destructive: 2 78% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 25 100% 55%;
+
+    --news-red: 2 78% 58%;
+    --news-red-foreground: 0 0% 100%;
+    --news-orange: 25 100% 55%;
+    --news-orange-dark: 22 100% 48%;
+    --news-ink: 0 0% 98%;
+
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 25 100% 55%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 25 100% 55%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-sans; }
+}
+
+@layer components {
+  .container-blog { @apply mx-auto px-4 md:px-6 max-w-7xl; }
+
+  .nav-link {
+    @apply text-sm font-semibold text-foreground hover:text-primary transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 uppercase tracking-wide;
+  }
+  .nav-link-active { @apply nav-link text-primary; }
+
+  .blog-card {
+    @apply bg-card rounded-md overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200
+           focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2;
+  }
+  .blog-meta { @apply text-xs font-semibold uppercase tracking-wide text-primary; }
+  .blog-title { @apply text-xl font-bold text-foreground leading-tight; }
+  .blog-excerpt { @apply text-muted-foreground leading-relaxed; }
+  .featured-title { @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight; }
+  .section-title {
+    @apply text-2xl font-extrabold text-foreground mb-6 pb-3 border-b-4 border-primary inline-block uppercase tracking-tight;
+  }
+
+  /* News badges */
+  .badge-breaking {
+    @apply inline-flex items-center gap-1 bg-[hsl(var(--news-red))] text-[hsl(var(--news-red-foreground))]
+           text-xs font-bold uppercase tracking-wider px-2 py-1 rounded;
+  }
+  .badge-category {
+    @apply inline-flex items-center bg-primary text-primary-foreground
+           text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded;
+  }
+
+  /* Accessibility */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .focus\:not-sr-only:focus {
+    position: static; width: auto; height: auto; padding: .5rem 1rem;
+    margin: 0; overflow: visible; clip: auto; white-space: normal;
+  }
+}
+
+/* Marquee animation for breaking news ticker */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker { animation: ticker 40s linear infinite; }
+
+/* ============================================================
+   Tiptap Editor & Reader Typography Styles
+   ============================================================ */
+
+/* Reader & Editor typography spacing fallback */
+.prose ul, .prose ol {
+  padding-left: 1.5rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+.prose ul {
+  list-style-type: disc !important;
+}
+.prose ol {
+  list-style-type: decimal !important;
+}
+.prose blockquote {
+  border-left-width: 4px !important;
+  border-left-color: hsl(var(--primary)) !important;
+  padding-left: 1rem !important;
+  font-style: italic !important;
+  margin: 1.5rem 0 !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+.prose img {
+  border-radius: 0.5rem !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 2rem auto !important;
+  display: block !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid hsl(var(--border));
+}
+
+/* Editor specific formatting and placeholders */
+.ProseMirror {
+  outline: none;
+  min-height: 400px;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: hsl(var(--muted-foreground) / 0.7);
+  pointer-events: none;
+  height: 0;
+}
+.ProseMirror img {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.ProseMirror img:hover {
+  filter: brightness(0.9);
+}
+.ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+.ProseMirror blockquote {
+  background-color: hsl(var(--muted) / 0.3);
+  padding: 0.75rem 1rem !important;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+.ProseMirror a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  cursor: pointer;
+}
+
